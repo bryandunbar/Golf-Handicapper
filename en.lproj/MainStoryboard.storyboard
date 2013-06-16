@@ -27,45 +27,16 @@
         <scene sceneID="hZn-EN-Ok2">
             <objects>
                 <viewController id="fqI-wM-Ygo" customClass="GHPlayersViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UHx-OM-wYr">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHPlayerCell" textLabel="j2O-2N-n5Y" detailTextLabel="NtZ-Wf-AE4" style="IBUITableViewCellStyleSubtitle" id="6x2-3F-dKw">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j2O-2N-n5Y">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NtZ-Wf-AE4">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="fqI-wM-Ygo" id="1qE-8G-PIC"/>
-                            <outlet property="delegate" destination="fqI-wM-Ygo" id="KZI-fJ-HaG"/>
-                        </connections>
-                    </tableView>
                     <navigationItem key="navigationItem" title="Players" id="a2o-lD-pLd">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eZN-Zp-CLw"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eZN-Zp-CLw">
+                            <connections>
+                                <segue destination="kVZ-QO-Qcz" kind="modal" id="lRQ-PD-JTK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="lmG-Rm-YF2" kind="push" identifier="editPlayerSegue" id="fod-zA-HCB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKE-Gb-9tU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -254,7 +225,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rss-Kd-Oaa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2090" y="730"/>
+            <point key="canvasLocation" x="2088" y="730"/>
         </scene>
         <!--Navigation Controller - Courses-->
         <scene sceneID="zmx-O9-eBa">
@@ -294,11 +265,110 @@
             </objects>
             <point key="canvasLocation" x="1710" y="730"/>
         </scene>
+        <!--Add Or Edit Player View Controller - New Player-->
+        <scene sceneID="tWR-rU-lqO">
+            <objects>
+                <tableViewController id="lmG-Rm-YF2" customClass="GHAddOrEditPlayerViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="A0B-Fx-epc">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="znu-gf-pHv">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uMz-LX-Jci">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" clearButtonMode="whileEditing" id="upd-Jf-cUI">
+                                                    <rect key="frame" x="20" y="0.0" width="272" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="lmG-Rm-YF2" id="tut-Jq-PJW"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mJq-f5-RCo">
+                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" clearButtonMode="whileEditing" id="X8S-Qs-TDn">
+                                                    <rect key="frame" x="20" y="0.0" width="272" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="lmG-Rm-YF2" id="xsd-3E-9z0"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="lmG-Rm-YF2" id="hrS-Cl-jul"/>
+                            <outlet property="delegate" destination="lmG-Rm-YF2" id="qVE-XI-W4n"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New Player" id="Y6q-Ya-CDq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qJz-oo-PYE">
+                            <connections>
+                                <action selector="cancelTapped:" destination="lmG-Rm-YF2" id="1Jp-s4-jU9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FKF-qx-SIz">
+                            <connections>
+                                <action selector="saveTapped:" destination="lmG-Rm-YF2" id="OdY-1R-1mt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstName" destination="upd-Jf-cUI" id="nkV-T9-rHh"/>
+                        <outlet property="lastName" destination="X8S-Qs-TDn" id="fAB-0z-rGj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LUq-bS-EaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2088" y="47"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mFx-MS-iIU">
+            <objects>
+                <navigationController id="kVZ-QO-Qcz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MyC-V6-a8k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lmG-Rm-YF2" kind="relationship" relationship="rootViewController" id="Pu4-YL-GVb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pET-jg-vAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1710" y="47"/>
+        </scene>
     </scenes>
     <classes>
         <class className="GHAddOrEditCourseViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditCourseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelTapped:"/>
                 <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="abbreviation" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="name" candidateClass="UITextField"/>
@@ -307,12 +377,16 @@
                 <relationship kind="outlet" name="tees" candidateClass="UITextField"/>
             </relationships>
         </class>
+        <class className="GHAddOrEditPlayerViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditPlayerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="saveTapped:"/>
+                <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="GHCoursesViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHCoursesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelController:" candidateClass="UIStoryboardSegue"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
         </class>
         <class className="GHPlayersViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHPlayersViewController.h"/>
@@ -322,9 +396,6 @@
         </class>
         <class className="SSManagedViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SSManagedViewController.h"/>
-        </class>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
         </class>
         <class className="UQFormTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UQFormTableViewController.h"/>
@@ -337,5 +408,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Fnl-fO-Iy6"/>
+        <segue reference="fod-zA-HCB"/>
     </inferredMetricsTieBreakers>
 </document>

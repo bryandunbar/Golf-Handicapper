@@ -8,25 +8,18 @@
 
 #import "GHPlayersViewController.h"
 #import "GHPlayer.h"
+#import "GHAddOrEditPlayerViewController.h"
+
 @interface GHPlayersViewController ()
 
 @end
 
 @implementation GHPlayersViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.ignoreChange = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,9 +29,65 @@
 }
 
 #pragma mark -
+#pragma mark - Table View
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHPlayerCell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GHPlayerCell"];
+    }
+    
+    GHPlayer *player = (GHPlayer*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", player.lastName, player.firstName];
+    
+    if (player.handicapIndex != nil) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Index: %2.1f", [player.handicapIndex doubleValue]];
+    } else {
+        cell.detailTextLabel.text = @"NH";
+    }
+    
+    
+    return cell;
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"editPlayerSegue" sender:self];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        SSManagedObject *obj = (SSManagedObject*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+        [obj delete];
+        
+    }
+}
+
+#pragma mark -
 #pragma SSDataKit Overrides
 -(Class)entityClass {
     return [GHPlayer class];
 }
+
+#pragma mark -
+#pragma mark Segues
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([@"editPlayerSegue" isEqualToString:segue.identifier]) {
+        
+        GHAddOrEditPlayerViewController *controller = (GHAddOrEditPlayerViewController*)segue.destinationViewController;
+        
+        GHPlayer *selectedPlayer =  (GHPlayer*)[self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        controller.player = selectedPlayer;
+    }
+}
+
 
 @end

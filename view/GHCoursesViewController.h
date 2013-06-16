@@ -9,6 +9,4 @@
 #import "SSManagedTableViewController.h"
 
 @interface GHCoursesViewController : SSManagedTableViewController
-
-- (IBAction)cancelController:(UIStoryboardSegue *)segue;
 @end

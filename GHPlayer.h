@@ -14,6 +14,6 @@
 
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
-@property (nonatomic) double handicapIndex;
+@property (nonatomic, retain) NSNumber *handicapIndex;
 
 @end

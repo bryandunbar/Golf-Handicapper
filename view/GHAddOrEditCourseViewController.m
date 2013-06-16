@@ -31,8 +31,9 @@
     
     if (self.course) {
         self.navigationItem.leftBarButtonItem = nil; // Pushed, use default back
+        self.title = @"Edit Course";
         [self configureView];
-    }
+    } 
     
 }
 

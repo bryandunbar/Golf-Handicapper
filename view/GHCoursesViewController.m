@@ -10,8 +10,6 @@
 #import "GHCourse.h"
 #import "GHAddOrEditCourseViewController.h"
 @interface GHCoursesViewController ()
-
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation GHCoursesViewController
@@ -20,7 +18,6 @@
 {
     [super viewDidLoad];
     self.ignoreChange = NO;
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
