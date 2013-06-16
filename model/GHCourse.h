@@ -12,11 +12,10 @@
 
 @interface GHCourse : SSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * abbreviation;
-@property (nonatomic) int slope;
-@property (nonatomic) double rating;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * rating;
+@property (nonatomic, retain) NSNumber * slope;
 @property (nonatomic, retain) NSString * tees;
-
 
 @end

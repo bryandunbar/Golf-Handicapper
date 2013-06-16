@@ -1,18 +1,18 @@
 //
-//  GHCoursesViewController.m
+//  GHLeaguesViewController.m
 //  Golf Handicapper
 //
 //  Created by Bryan Dunbar on 6/15/13.
 //  Copyright (c) 2013 iPwn Technologies LLC. All rights reserved.
 //
 
-#import "GHCoursesViewController.h"
-#import "GHCourse.h"
-#import "GHAddOrEditCourseViewController.h"
-@interface GHCoursesViewController ()
+#import "GHLeaguesViewController.h"
+#import "GHLeague.h"
+#import "GHAddOrEditLeagueViewController.h"
+@interface GHLeaguesViewController ()
 @end
 
-@implementation GHCoursesViewController
+@implementation GHLeaguesViewController
 
 - (void)viewDidLoad
 {
@@ -30,16 +30,16 @@
 #pragma mark - Table View
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHCourseCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHLeagueCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GHCourseCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GHLeagueCell"];
     }
     
-    GHCourse *course = (GHCourse*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    GHLeague *league = (GHLeague*)[self.fetchedResultsController objectAtIndexPath:indexPath];
     
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ [%@]", course.name, course.abbreviation];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Tees: %2.1f/%d", course.tees, [course.rating doubleValue], [course.slope integerValue]];
+    cell.textLabel.text = league.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d players", league.players.count];
     
     
     return cell;
@@ -47,7 +47,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"editCourseSegue" sender:self];
+    [self performSegueWithIdentifier:@"editLeagueSegue" sender:self];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,19 +67,19 @@
 #pragma mark -
 #pragma SSDataKit Overrides
 -(Class)entityClass {
-    return [GHCourse class];
+    return [GHLeague class];
 }
 
 #pragma mark -
 #pragma mark Segues
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([@"editCourseSegue" isEqualToString:segue.identifier]) {
+    if ([@"editLeagueSegue" isEqualToString:segue.identifier]) {
         
-        GHAddOrEditCourseViewController *controller = (GHAddOrEditCourseViewController*)segue.destinationViewController;
+        GHAddOrEditLeagueViewController *controller = (GHAddOrEditLeagueViewController*)segue.destinationViewController;
         
-        GHCourse *selectedCourse =  (GHCourse*)[self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-        controller.course = selectedCourse;
+        GHLeague *selectedLeague =  (GHLeague*)[self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        controller.league = selectedLeague;
     }
 }
 @end

@@ -7,19 +7,20 @@
 //
 
 #import "GHPlayer.h"
+#import "GHLeague.h"
 
 
 @implementation GHPlayer
 
 @dynamic firstName;
-@dynamic lastName;
 @dynamic handicapIndex;
+@dynamic lastName;
+@dynamic leagues;
 
 
 + (NSString *)entityName {
-	return @"Player";
+    return @"Player";
 }
-
 + (NSArray *)defaultSortDescriptors {
     return @[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
 }

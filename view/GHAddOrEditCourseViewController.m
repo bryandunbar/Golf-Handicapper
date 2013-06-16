@@ -30,20 +30,33 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     if (self.course) {
-        self.navigationItem.leftBarButtonItem = nil; // Pushed, use default back
+        self.navigationItem.leftBarButtonItem = self.navigationItem.rightBarButtonItem = nil; // Pushed, use default back
         self.title = @"Edit Course";
         [self configureView];
     } 
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    if (self.course) {
+        self.course.name = self.name.text;
+        self.course.abbreviation = self.abbreviation.text;
+        self.course.rating =  @([self.rating.text doubleValue]);
+        self.course.slope = @([self.slope.text intValue]);
+        self.course.tees = self.tees.text;
+        [self.course save];
+    }
+}
+
 -(void)configureView {
     
     self.name.text = self.course.name;
     self.abbreviation.text = self.course.abbreviation;
-    self.rating.text = [NSString stringWithFormat:@"%f", self.course.rating];
+    self.rating.text = [NSString stringWithFormat:@"%2.1f", [self.course.rating doubleValue]];
 
-    self.slope.text = [NSString stringWithFormat:@"%d", self.course.slope];
+    self.slope.text = [self.course.slope stringValue];
     self.tees.text = self.course.tees;
     
 }
@@ -66,15 +79,6 @@
     if (!self.course) {
         self.course = [[GHCourse alloc] init];
     }
-    
-    self.course.name = self.name.text;
-    self.course.abbreviation = self.abbreviation.text;
-    self.course.rating =  [self.rating.text doubleValue];
-    self.course.slope = [self.slope.text intValue];
-    self.course.tees = self.tees.text;
-    
-    [self.course save];
-    
     
     if ([self.navigationController viewControllers][0] == self)
         [self.parentViewController dismissViewControllerAnimated:YES completion:nil];

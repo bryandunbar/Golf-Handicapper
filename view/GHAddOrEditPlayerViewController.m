@@ -28,11 +28,20 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     if (self.player) {
-        self.navigationItem.leftBarButtonItem = nil; // Pushed, use default back
+        self.navigationItem.leftBarButtonItem = self.navigationItem.rightBarButtonItem = nil; // Pushed, use default back
         self.title = @"Edit Player";
         [self configureView];
     }
     
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.player) {
+        self.player.firstName = self.firstName.text;
+        self.player.lastName = self.lastName.text;
+        [self.player save];   
+    }
 }
 
 -(void)configureView {
@@ -58,11 +67,6 @@
     if (!self.player) {
         self.player = [[GHPlayer alloc] init];
     }
-    
-    self.player.firstName = self.firstName.text;
-    self.player.lastName = self.lastName.text;
-    [self.player save];
-    
     
     if ([self.navigationController viewControllers][0] == self)
         [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
