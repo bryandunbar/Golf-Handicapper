@@ -18,6 +18,10 @@
 @property (nonatomic, retain) NSDecimalNumber * handicapIndex;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSSet *leagues;
+
+/** Transient **/
+@property (nonatomic, retain) NSNumber * score;
+
 @end
 
 @interface GHPlayer (CoreDataGeneratedAccessors)

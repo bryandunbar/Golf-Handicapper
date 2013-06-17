@@ -17,6 +17,9 @@
 @dynamic lastName;
 @dynamic leagues;
 
+/** Transient Properties **/
+@dynamic score;
+
 
 + (NSString *)entityName {
     return @"Player";
