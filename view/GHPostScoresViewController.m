@@ -14,6 +14,7 @@
 #import "GHPlayerScoreCell.h"
 #import "UQDateField2.h"
 #import "BDPickerField.h"
+#import "GHHandicapCalculator.h"
 
 #define LEAGUE_TAG      1000
 #define COURSE_TAG      1001
@@ -24,6 +25,9 @@
     NSArray *_leagues;
     NSArray *_courses;
     NSArray *_players;
+    
+    GHHandicapCalculator *calculator;
+
 }
 
 @property (nonatomic,strong) NSDate *selectedDate;
@@ -63,6 +67,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    calculator = [[GHHandicapCalculator alloc] init];
     self.selectedDate = [NSDate date];
     
     [self getCoursesWithBlock:^(NSArray *courses) {
@@ -256,16 +261,28 @@
 #pragma mark -
 #pragma mark Actions
 - (IBAction)postTapped:(id)sender {
+    [self hideKeyboard];
     
     // Create all the scores save and pop
     for (GHPlayer *player in _players) {
         NSLog(@"%@ %@: %d", player.firstName, player.lastName, [player.score intValue]);
         
-        GHScore *score = [[GHScore alloc] init];
-        score.value = player.score;
-        score.date = self.selectedDate;
-        score.course = self.selectedCourse;
-        [score save];
+        if ([player.score intValue] > 0) {
+        
+            GHScore *score = [[GHScore alloc] init];
+            score.value = player.score;
+            score.date = self.selectedDate;
+            score.course = self.selectedCourse;
+            score.league = self.selectedLeague;
+            score.player = player;
+            [score save];
+            
+            [player addScoresObject:score];
+            double index = [calculator handicapIndexForScores:[player.scores allObjects]];
+            player.handicapIndex = @(index);
+            [player save];
+            
+        }
     }
     
     [self.navigationController popViewControllerAnimated:YES];

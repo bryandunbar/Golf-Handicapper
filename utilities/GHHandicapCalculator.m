@@ -86,7 +86,7 @@
 
 
 -(int)courseHandicapForHandicap:(double)handicapIndex forCourse:(GHCourse *)course {
-    if (handicapIndex == NSNotFound) return NSNotFound;
+    if (handicapIndex == NSNotFound || course == nil) return NSNotFound;
     return lroundf(handicapIndex * [course.slope intValue] / 113);
 }
 

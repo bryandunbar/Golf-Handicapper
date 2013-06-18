@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "SSManagedObject.h"
-@class GHCourse, GHPlayer;
+@class GHCourse, GHPlayer, GHLeague;
 
 @interface GHScore : SSManagedObject
 
@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) GHCourse *course;
 @property (nonatomic, retain) GHPlayer *player;
-
+@property (nonatomic, retain) GHLeague *league;
 
 @property (nonatomic,readonly) double differential;
 

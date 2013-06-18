@@ -42,10 +42,10 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", player.lastName, player.firstName];
     
-    if (player.handicapIndex != nil) {
+    if (player.handicapIndex != nil && [player.handicapIndex intValue] != NSNotFound) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Index: %2.1f", [player.handicapIndex doubleValue]];
     } else {
-        cell.detailTextLabel.text = @"NH";
+        cell.detailTextLabel.text = @"Index: NH";
     }
     
     

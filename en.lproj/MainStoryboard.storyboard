@@ -53,6 +53,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="C4c-wZ-59Q" kind="push" id="54G-9Z-Nyp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -70,6 +73,197 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BTx-fp-h54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1205" y="607"/>
+        </scene>
+        <!--Handicap Selection View Controller - Get Handicaps-->
+        <scene sceneID="5BI-Xi-dhR">
+            <objects>
+                <tableViewController id="C4c-wZ-59Q" customClass="GHHandicapSelectionViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CEV-rh-QK8">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="5Lx-jZ-qRv">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHLeagueCell" rowHeight="44" id="Dsa-7g-brM">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="League" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dPk-bH-QbD" customClass="BDPickerField">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="TXt-zx-iG5"/>
+                                                        <constraint firstAttribute="height" constant="43" id="lCH-tr-sCZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="dPk-bH-QbD" firstAttribute="centerY" secondItem="Dsa-7g-brM" secondAttribute="centerY" type="default" id="G0w-EP-OdS"/>
+                                            <constraint firstItem="dPk-bH-QbD" firstAttribute="leading" secondItem="Dsa-7g-brM" secondAttribute="leading" constant="30" id="yCt-Mi-udG"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHCourseCell" rowHeight="44" id="w2G-C4-JJT">
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Course" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DO4-qw-wVH" customClass="BDPickerField">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="iQ4-nj-LoP"/>
+                                                        <constraint firstAttribute="height" constant="43" id="yNK-UL-inQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="DO4-qw-wVH" firstAttribute="leading" secondItem="w2G-C4-JJT" secondAttribute="leading" constant="30" id="TTB-IP-lpm"/>
+                                            <constraint firstItem="DO4-qw-wVH" firstAttribute="top" secondItem="w2G-C4-JJT" secondAttribute="top" type="default" id="hqj-fO-Ul0"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHScoreSwitchCell" rowHeight="44" id="wcz-W4-3VV">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ou-kM-tdh"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Scores from this league only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-4L-3yF">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="7Vc-5D-cDZ"/>
+                                                        <constraint firstAttribute="width" constant="191" id="oUe-1K-c9a"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="dfL-4L-3yF" firstAttribute="leading" secondItem="wcz-W4-3VV" secondAttribute="leading" constant="26" id="0mf-7m-kDB"/>
+                                            <constraint firstItem="dfL-4L-3yF" firstAttribute="centerY" secondItem="3ou-kM-tdh" secondAttribute="centerY" type="default" id="6Tz-Uy-6iN"/>
+                                            <constraint firstItem="3ou-kM-tdh" firstAttribute="top" secondItem="wcz-W4-3VV" secondAttribute="top" constant="8" id="LhU-bq-MVx"/>
+                                            <constraint firstItem="3ou-kM-tdh" firstAttribute="leading" secondItem="dfL-4L-3yF" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Xtb-BK-lku"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="xgT-ak-oi5">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHButtonCell" rowHeight="44" id="myU-8T-QhD">
+                                        <rect key="frame" x="0.0" y="164" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4z-fQ-Slm">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="cQR-7s-v2W"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Get Handicaps">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="Qan-L1-qk7" kind="push" identifier="getHandicapsSegue" id="wjg-tT-7AA"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="top" secondItem="myU-8T-QhD" secondAttribute="top" constant="1" id="OtK-Zx-RiN"/>
+                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="centerX" secondItem="myU-8T-QhD" secondAttribute="centerX" type="default" id="lAv-xO-R42"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="C4c-wZ-59Q" id="i0e-HI-mDh"/>
+                            <outlet property="delegate" destination="C4c-wZ-59Q" id="PLo-5k-V0q"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Get Handicaps" id="Gvi-3R-G5q"/>
+                    <connections>
+                        <outlet property="coursePicker" destination="DO4-qw-wVH" id="0n6-wb-7Uv"/>
+                        <outlet property="leaguePicker" destination="dPk-bH-QbD" id="712-4s-reI"/>
+                        <outlet property="scoresSwitch" destination="3ou-kM-tdh" id="RcU-kF-Xhs"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ikc-Zg-Lmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1703" y="371"/>
+        </scene>
+        <!--Handicap List View Controller - Handicaps-->
+        <scene sceneID="SsR-5A-ESj">
+            <objects>
+                <tableViewController id="Qan-L1-qk7" customClass="GHHandicapListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vJI-RK-nX7">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHHandicapListCell" textLabel="YCb-O8-cFw" detailTextLabel="PB7-LA-i60" style="IBUITableViewCellStyleValue1" id="FNi-JN-TkY">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-O8-cFw">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB7-LA-i60">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Qan-L1-qk7" id="M5m-Qb-Xxn"/>
+                            <outlet property="delegate" destination="Qan-L1-qk7" id="CJH-T1-sAJ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Handicaps" id="2Lu-r8-B5L"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="kYu-HP-Qpa" id="lf9-eq-YKF"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvB-nl-5vt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="kYu-HP-Qpa">
+                    <connections>
+                        <outlet property="delegate" destination="Qan-L1-qk7" id="yVK-4Z-Thm"/>
+                        <outlet property="searchContentsController" destination="Qan-L1-qk7" id="Nft-TF-Ie0"/>
+                        <outlet property="searchResultsDataSource" destination="Qan-L1-qk7" id="cQX-2t-bgi"/>
+                        <outlet property="searchResultsDelegate" destination="Qan-L1-qk7" id="eAz-qW-NtX"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="2060" y="368"/>
         </scene>
         <!--Post Scores View Controller - Post Scores-->
         <scene sceneID="q0o-5o-kol">
@@ -203,7 +397,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmU-OS-YTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="606"/>
+            <point key="canvasLocation" x="1693" y="1064"/>
         </scene>
         <!--Players View Controller - Players-->
         <scene sceneID="hZn-EN-Ok2">
@@ -421,7 +615,7 @@
                                 <action selector="cancelTapped:" destination="WSh-8w-l6z" id="fbE-U9-7cA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LhB-dm-A7G">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LhB-dm-A7G">
                             <connections>
                                 <action selector="saveTapped:" destination="WSh-8w-l6z" id="fWW-6u-6QL"/>
                             </connections>
@@ -535,7 +729,7 @@
                                 <action selector="cancelTapped:" destination="lmG-Rm-YF2" id="1Jp-s4-jU9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FKF-qx-SIz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FKF-qx-SIz">
                             <connections>
                                 <action selector="saveTapped:" destination="lmG-Rm-YF2" id="OdY-1R-1mt"/>
                             </connections>
@@ -645,7 +839,7 @@
                                 <action selector="cancelTapped:" destination="qih-fs-mGp" id="VbC-Yq-5Mj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FmN-0s-mKc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FmN-0s-mKc">
                             <connections>
                                 <action selector="saveTapped:" destination="qih-fs-mGp" id="mwY-fT-8Nh"/>
                             </connections>
@@ -795,7 +989,7 @@
         <scene sceneID="PX4-lh-dQV">
             <objects>
                 <navigationController id="T64-aD-JBb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="fxQ-8S-zu2"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="14-gear.png" id="fxQ-8S-zu2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l33-uC-fBd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -810,11 +1004,11 @@
             </objects>
             <point key="canvasLocation" x="581" y="-615"/>
         </scene>
-        <!--Navigation Controller - Manage-->
+        <!--Navigation Controller - Home-->
         <scene sceneID="CJc-US-sfq">
             <objects>
                 <navigationController id="tN5-Fw-q22" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Manage" id="VzT-Nw-kDI"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="129-golf.png" id="VzT-Nw-kDI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BHT-jq-BcJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -830,6 +1024,10 @@
             <point key="canvasLocation" x="679" y="607"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="129-golf.png" width="29" height="26"/>
+        <image name="14-gear.png" width="19" height="19"/>
+    </resources>
     <classes>
         <class className="BDPickerField" superclassName="UITextField">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BDPickerField.h"/>
@@ -837,6 +1035,7 @@
         <class className="GHAddOrEditCourseViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditCourseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="abbreviation" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="name" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rating" candidateClass="UITextField"/>
@@ -847,8 +1046,6 @@
         <class className="GHAddOrEditLeagueViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditLeagueViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelTapped:"/>
-                <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="name" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="numPlayers" candidateClass="UILabel"/>
             </relationships>
@@ -856,12 +1053,25 @@
         <class className="GHAddOrEditPlayerViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditPlayerViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelTapped:"/>
+                <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="GHCoursesViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHCoursesViewController.h"/>
+        </class>
+        <class className="GHHandicapListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHHandicapListViewController.h"/>
+        </class>
+        <class className="GHHandicapSelectionViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHHandicapSelectionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="coursePicker" candidateClass="BDPickerField"/>
+                <relationship kind="outlet" name="leaguePicker" candidateClass="BDPickerField"/>
+                <relationship kind="outlet" name="scoresSwitch" candidateClass="UISwitch"/>
+            </relationships>
         </class>
         <class className="GHLeaguesViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHLeaguesViewController.h"/>

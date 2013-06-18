@@ -17,7 +17,7 @@
 @dynamic date;
 @dynamic course;
 @dynamic player;
-
+@dynamic league;
 
 + (NSString *)entityName {
     return @"Score";

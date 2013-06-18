@@ -16,7 +16,7 @@
 @interface GHPlayer : SSManagedObject
 
 @property (nonatomic, retain) NSString * firstName;
-@property (nonatomic, retain) NSDecimalNumber * handicapIndex;
+@property (nonatomic, retain) NSNumber * handicapIndex;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSSet *leagues;
 @property (nonatomic, retain) NSSet *scores;
