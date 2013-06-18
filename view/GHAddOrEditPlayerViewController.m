@@ -33,6 +33,8 @@
         [self configureView];
     }
     
+    [self.firstName becomeFirstResponder];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

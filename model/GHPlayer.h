@@ -11,6 +11,7 @@
 #import "SSManagedObject.h"
 
 @class GHLeague;
+@class GHScore;
 
 @interface GHPlayer : SSManagedObject
 
@@ -18,6 +19,7 @@
 @property (nonatomic, retain) NSDecimalNumber * handicapIndex;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSSet *leagues;
+@property (nonatomic, retain) NSSet *scores;
 
 /** Transient **/
 @property (nonatomic, retain) NSNumber * score;
@@ -30,5 +32,11 @@
 - (void)removeLeaguesObject:(GHLeague *)value;
 - (void)addLeagues:(NSSet *)values;
 - (void)removeLeagues:(NSSet *)values;
+
+- (void)addScoresObject:(GHScore *)value;
+- (void)removeScoresObject:(GHScore *)value;
+- (void)addScores:(NSSet *)values;
+- (void)removeScores:(NSSet *)values;
+
 
 @end

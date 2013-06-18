@@ -40,6 +40,7 @@
     }
     
     [self configureView];
+    [self.name becomeFirstResponder];
 }
 
 

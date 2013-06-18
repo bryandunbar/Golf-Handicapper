@@ -103,14 +103,37 @@
                                     <constraint firstItem="wJm-UV-c2o" firstAttribute="centerY" secondItem="bnl-cC-VMv" secondAttribute="centerY" type="default" id="kEY-Q7-AZG"/>
                                 </constraints>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHPostScoreDateCell" rowHeight="44" id="9pc-vX-2Kp">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHPostScoreCourseCell" rowHeight="44" id="YdT-wC-K0D">
                                 <rect key="frame" x="0.0" y="91" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-bN-f9M" customClass="UQDateField2">
+                                        <textField opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Course" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="utZ-88-dIe" customClass="BDPickerField">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="6Pt-oP-dcL"/>
+                                                <constraint firstAttribute="height" constant="43" id="avo-Di-iBu"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="utZ-88-dIe" firstAttribute="top" secondItem="YdT-wC-K0D" secondAttribute="top" type="default" id="cTv-Fn-CVE"/>
+                                    <constraint firstItem="utZ-88-dIe" firstAttribute="leading" secondItem="YdT-wC-K0D" secondAttribute="leading" constant="30" id="rBZ-7d-Fhu"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHPostScoreDateCell" rowHeight="44" id="9pc-vX-2Kp">
+                                <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-bN-f9M" customClass="UQDateField2">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="240" id="Wkj-Q2-fVv"/>
                                             </constraints>
@@ -127,7 +150,7 @@
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHPlayerScoreCell" rowHeight="44" id="LIb-fk-OuY" customClass="GHPlayerScoreCell">
-                                <rect key="frame" x="0.0" y="135" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="179" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -171,7 +194,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Post Scores" id="9Cc-0I-ocw">
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="zmx-7p-kiJ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="zmx-7p-kiJ">
+                            <connections>
+                                <action selector="postTapped:" destination="ANW-Dv-DXR" id="tah-s9-uJC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmU-OS-YTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -803,6 +830,80 @@
             <point key="canvasLocation" x="679" y="607"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="BDPickerField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BDPickerField.h"/>
+        </class>
+        <class className="GHAddOrEditCourseViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditCourseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="abbreviation" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="name" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rating" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="slope" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tees" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GHAddOrEditLeagueViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditLeagueViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelTapped:"/>
+                <relationship kind="action" name="saveTapped:"/>
+                <relationship kind="outlet" name="name" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="numPlayers" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GHAddOrEditPlayerViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditPlayerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GHCoursesViewController" superclassName="SSManagedTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHCoursesViewController.h"/>
+        </class>
+        <class className="GHLeaguesViewController" superclassName="SSManagedTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHLeaguesViewController.h"/>
+        </class>
+        <class className="GHMainMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHMainMenuViewController.h"/>
+        </class>
+        <class className="GHPlayerScoreCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHPlayerScoreCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="playerName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="score" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GHPlayersViewController" superclassName="SSManagedTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHPlayersViewController.h"/>
+        </class>
+        <class className="GHPostScoresViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHPostScoresViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="postTapped:"/>
+            </relationships>
+        </class>
+        <class className="GHSelectPlayersViewController" superclassName="SSManagedTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHSelectPlayersViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SSManagedTableViewController" superclassName="SSManagedViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSManagedTableViewController.h"/>
+        </class>
+        <class className="SSManagedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSManagedViewController.h"/>
+        </class>
+        <class className="UQDateField2" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UQDateField2.h"/>
+        </class>
+        <class className="UQFormTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UQFormTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -33,7 +33,9 @@
         self.navigationItem.leftBarButtonItem = self.navigationItem.rightBarButtonItem = nil; // Pushed, use default back
         self.title = @"Edit Course";
         [self configureView];
-    } 
+    }
+    
+    [self.name becomeFirstResponder];
     
 }
 
