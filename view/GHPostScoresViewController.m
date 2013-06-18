@@ -21,7 +21,7 @@
 #define DATE_TAG        1002
 #define SCORE_BEGIN_TAG 1003
 
-@interface GHPostScoresViewController () <UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface GHPostScoresViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UQDateFieldDelegate> {
     NSArray *_leagues;
     NSArray *_courses;
     NSArray *_players;
@@ -152,6 +152,7 @@
             UQDateField2 *dateField =  (UQDateField2*)[cell viewWithTag:DATE_TAG];
             dateField.dateMode = UIDatePickerModeDate;
             dateField.dateFormat = @"MM/dd/yyyy";
+            dateField.dateFieldDelegate = self;
             [dateField setSelectedDate:self.selectedDate];
 
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -256,6 +257,10 @@
         GHPlayer *player = _players[idx];
         player.score = @([textField.text integerValue]);
     }
+}
+
+-(void)dateChanged:(UQDateField2 *)dateField {
+    self.selectedDate = dateField.picker.date;
 }
 
 #pragma mark -
