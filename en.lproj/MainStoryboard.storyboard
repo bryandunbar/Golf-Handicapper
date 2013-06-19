@@ -777,7 +777,7 @@
             </objects>
             <point key="canvasLocation" x="2992" y="-1773"/>
         </scene>
-        <!--Score List View Controller-->
+        <!--Score List View Controller - Scores-->
         <scene sceneID="K6r-JS-KjB">
             <objects>
                 <tableViewController id="vkp-BP-t62" customClass="GHScoreListViewController" sceneMemberID="viewController">
@@ -786,11 +786,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHScoreCell" id="Gae-t7-ArY" customClass="GHScoreCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHScoreCell" id="Gae-t7-ArY" customClass="GHScoreCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qr0-DR-Z4y">
@@ -821,20 +821,20 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gls-Jo-tjY" secondAttribute="trailing" constant="20" type="user" id="3Ph-YC-Xc0"/>
-                                    <constraint firstItem="fRs-L6-2Re" firstAttribute="bottom" secondItem="gls-Jo-tjY" secondAttribute="bottom" type="default" id="3fa-DO-cq7"/>
-                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="leading" secondItem="qr0-DR-Z4y" secondAttribute="trailing" constant="-1" type="user" id="HIv-Mn-Kxe"/>
+                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="bottom" secondItem="Gae-t7-ArY" secondAttribute="bottom" type="default" id="BsY-Dy-SzJ"/>
                                     <constraint firstItem="gls-Jo-tjY" firstAttribute="top" secondItem="Gae-t7-ArY" secondAttribute="top" type="default" id="LAt-hu-jbY"/>
-                                    <constraint firstItem="qr0-DR-Z4y" firstAttribute="leading" secondItem="Gae-t7-ArY" secondAttribute="leading" constant="20" type="user" id="MXJ-Rl-OVP"/>
+                                    <constraint firstItem="fRs-L6-2Re" firstAttribute="bottom" secondItem="Gae-t7-ArY" secondAttribute="bottom" type="default" id="Y7k-Ph-X2d"/>
                                     <constraint firstItem="fRs-L6-2Re" firstAttribute="leading" secondItem="Gae-t7-ArY" secondAttribute="leading" constant="20" type="default" id="ZZH-VM-Qj5"/>
-                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="centerY" secondItem="Gae-t7-ArY" secondAttribute="centerY" type="default" id="dKw-Ou-QoN"/>
+                                    <constraint firstAttribute="trailing" secondItem="gls-Jo-tjY" secondAttribute="trailing" constant="27" id="eAa-Ll-ohw"/>
                                     <constraint firstItem="qr0-DR-Z4y" firstAttribute="top" secondItem="Gae-t7-ArY" secondAttribute="top" constant="2" id="gC7-7b-dHI"/>
                                     <constraint firstItem="fRs-L6-2Re" firstAttribute="trailing" secondItem="qr0-DR-Z4y" secondAttribute="trailing" type="default" id="wj8-LN-KSg"/>
+                                    <constraint firstItem="qr0-DR-Z4y" firstAttribute="leading" secondItem="Gae-t7-ArY" secondAttribute="leading" constant="20" type="default" id="yS6-ju-iht"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="courseLabel" destination="fRs-L6-2Re" id="ged-JY-9HI"/>
                                     <outlet property="dateLabel" destination="qr0-DR-Z4y" id="mzm-4i-4cx"/>
                                     <outlet property="scoreLabel" destination="gls-Jo-tjY" id="uiD-4d-eMV"/>
+                                    <segue destination="zaQ-Rq-0Ed" kind="push" identifier="editScoreSegue" id="Fwt-hX-8va"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -843,7 +843,7 @@
                             <outlet property="delegate" destination="vkp-BP-t62" id="ycL-t8-dOR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hx4-nF-Kr7"/>
+                    <navigationItem key="navigationItem" title="Scores" id="hx4-nF-Kr7"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vVv-bj-K7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1128,6 +1128,136 @@
             </objects>
             <point key="canvasLocation" x="679" y="607"/>
         </scene>
+        <!--Edit Score View Controller - Edit Score-->
+        <scene sceneID="cqa-y5-EoF">
+            <objects>
+                <tableViewController id="zaQ-Rq-0Ed" customClass="GHEditScoreViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OGP-um-ZKp">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="TjX-0w-GX7">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHEditScoreDateCell" rowHeight="44" id="AAH-QO-We8">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FK-iL-TMF" customClass="UQDateField2">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="PH5-Fa-gPI"/>
+                                                        <constraint firstAttribute="width" constant="240" id="asg-Rr-XpR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="8FK-iL-TMF" firstAttribute="bottom" secondItem="AAH-QO-We8" secondAttribute="bottom" type="default" id="OJ5-zO-vLd"/>
+                                            <constraint firstItem="8FK-iL-TMF" firstAttribute="leading" secondItem="AAH-QO-We8" secondAttribute="leading" constant="30" id="qg7-Ru-SD8"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHEditScoreValueCell" id="ssX-9R-zi5">
+                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4hh-VP-Esr">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="272" id="QmE-eL-7i8"/>
+                                                        <constraint firstAttribute="height" constant="43" id="ciR-S2-Bc9"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="zaQ-Rq-0Ed" id="Jyh-QD-IUy"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="4hh-VP-Esr" firstAttribute="leading" secondItem="ssX-9R-zi5" secondAttribute="leading" constant="30" id="faS-Qp-CCm"/>
+                                            <constraint firstItem="4hh-VP-Esr" firstAttribute="top" secondItem="ssX-9R-zi5" secondAttribute="top" type="default" id="rbk-ju-bSS"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Lj7-2z-aui">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHEditScoreLeagueCell" rowHeight="44" id="dTA-yg-ov5">
+                                        <rect key="frame" x="0.0" y="120" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="League" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="joB-mp-E7G" customClass="BDPickerField">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="lnv-AL-Pqs"/>
+                                                        <constraint firstAttribute="width" constant="240" id="xTN-NB-8n1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="joB-mp-E7G" firstAttribute="centerY" secondItem="dTA-yg-ov5" secondAttribute="centerY" type="default" id="0Ef-kA-kQn"/>
+                                            <constraint firstItem="joB-mp-E7G" firstAttribute="leading" secondItem="dTA-yg-ov5" secondAttribute="leading" constant="30" id="SyW-9S-Fic"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHEditScoreCourseCell" rowHeight="44" id="0WG-2g-BXl">
+                                        <rect key="frame" x="0.0" y="165" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Course" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t6V-5u-lbu" customClass="BDPickerField">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="Adq-29-O9u"/>
+                                                        <constraint firstAttribute="height" constant="43" id="Q69-7u-cB4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="t6V-5u-lbu" firstAttribute="top" secondItem="0WG-2g-BXl" secondAttribute="top" type="default" id="P21-te-aLs"/>
+                                            <constraint firstItem="t6V-5u-lbu" firstAttribute="leading" secondItem="0WG-2g-BXl" secondAttribute="leading" constant="30" id="RbA-7c-iE9"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="zaQ-Rq-0Ed" id="y0h-gS-SWe"/>
+                            <outlet property="delegate" destination="zaQ-Rq-0Ed" id="5gz-b0-Mt4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Score" id="AZx-SM-IaO"/>
+                    <connections>
+                        <outlet property="coursePicker" destination="t6V-5u-lbu" id="sF2-bz-DCA"/>
+                        <outlet property="dateField" destination="8FK-iL-TMF" id="wx7-eJ-U9Z"/>
+                        <outlet property="leaguePicker" destination="joB-mp-E7G" id="MJG-Mx-aAJ"/>
+                        <outlet property="scoreValue" destination="4hh-VP-Esr" id="NJT-gp-lhS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xAG-1s-Plm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3730" y="-1773"/>
+        </scene>
     </scenes>
     <resources>
         <image name="129-golf.png" width="29" height="26"/>
@@ -1166,6 +1296,15 @@
         </class>
         <class className="GHCoursesViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHCoursesViewController.h"/>
+        </class>
+        <class className="GHEditScoreViewController" superclassName="UQFormTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHEditScoreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="coursePicker" candidateClass="BDPickerField"/>
+                <relationship kind="outlet" name="dateField" candidateClass="UQDateField2"/>
+                <relationship kind="outlet" name="leaguePicker" candidateClass="BDPickerField"/>
+                <relationship kind="outlet" name="scoreValue" candidateClass="UITextField"/>
+            </relationships>
         </class>
         <class className="GHHandicapListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHHandicapListViewController.h"/>

@@ -11,6 +11,7 @@
 #import "GHScore.h"
 #import "GHCourse.h"
 #import "GHHandicapCalculator.h"
+#import "GHEditScoreViewController.h"
 
 @interface GHScoreListViewController () {
     NSMutableArray *_scores;
@@ -108,33 +109,15 @@
     [_scores removeObject:score];
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+#pragma mark -
+#pragma mark Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([@"editScoreSegue" isEqualToString:segue.identifier]) {
+        GHEditScoreViewController *controller = (GHEditScoreViewController*)segue.destinationViewController;
+        controller.score =  _scores[self.tableView.indexPathForSelectedRow.row];
+    }
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
 
 @end

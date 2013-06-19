@@ -45,4 +45,20 @@
     [player calculateIndex];
 }
 
+-(void)changeScoreValue:(NSNumber *)newValue {
+    
+    int currentValue = [self.value intValue];
+    int iNewValue = [newValue intValue];
+    
+    // Don't do the work if we don't have to
+    if (currentValue != iNewValue) {
+        self.value = newValue;
+        [self save];
+        
+        // Update hte players index
+        [self.player calculateIndex];
+    }
+    
+}
+
 @end

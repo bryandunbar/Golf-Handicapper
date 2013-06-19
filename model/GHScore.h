@@ -22,4 +22,5 @@
 
 @property (nonatomic,readonly) double differential;
 
+-(void)changeScoreValue:(NSNumber*)newValue;
 @end
