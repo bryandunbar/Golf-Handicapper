@@ -81,8 +81,10 @@
     }];
     
     [self getCoursesWithBlock:^(NSArray *courses) {
-        _courses = courses;
-        if (courses.count > 0) self.selectedCourse = _courses[0];
+        NSMutableArray *arr = [NSMutableArray arrayWithObject:@"<No Course, Show Index>"];
+        [arr addObjectsFromArray:courses];
+        _courses = arr;
+        if (_courses.count > 1) self.selectedCourse = _courses[1];
 
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
     }];
@@ -132,8 +134,13 @@
     if (pickerView.tag == LEAGUE_TAG)
         return [[_leagues objectAtIndex:row] name];
     else if (pickerView.tag == COURSE_TAG) {
-        GHCourse *course = _courses[row];
-        return [course description];
+        
+        if (row == 0) {
+            return @"<No Course, Show Index>";
+        } else {
+            GHCourse *course = _courses[row];
+            return [course description];
+        }
     }
     
     return @"";
@@ -142,7 +149,11 @@
     if (pickerView.tag == LEAGUE_TAG)
         self.selectedLeague = _leagues[row];
     else if (pickerView.tag == COURSE_TAG) {
-        self.selectedCourse = _courses[row];
+        
+        if (row == 0)
+            self.selectedCourse = nil;
+        else
+            self.selectedCourse = _courses[row];
     }
 }
 
