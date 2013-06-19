@@ -8,11 +8,14 @@
 
 #import "GHHandicapListViewController.h"
 #import "GHHandicapCalculator.h"
-
-@interface GHHandicapListViewController () {
+#import "GHPrintFormmater.h"
+@interface GHHandicapListViewController () <UIWebViewDelegate> {
     NSMutableArray *data;
     GHHandicapCalculator *calculator;
+    UIWebView *printWebView;
 }
+
+@property (nonatomic,strong) UIBarButtonItem *printButton;
 @end
 
 @implementation GHHandicapListViewController
@@ -24,6 +27,7 @@
     
     // Load the table
     [self getDataWithBlock:^{
+        [self createPrintWebView];
     }];
 }
 
@@ -121,5 +125,53 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+#pragma mark - Printing
+-(void)createPrintWebView {
+    
+    printWebView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    printWebView.delegate = self;
+    
+    GHPrintFormmater *pf = [[GHPrintFormmater alloc] init];
+    NSString *html = [pf printableHtmlForData:data league:self.league andCourse:self.course];
+    [printWebView loadHTMLString:html baseURL:nil];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    // Set up print button...
+    if ([UIPrintInteractionController isPrintingAvailable]) {
+        UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printWebView:)];
+        [self.navigationItem setRightBarButtonItem:barButton animated:NO];
+        self.printButton = barButton;
+    }
+}
+
+-(void)printWebView:(id)sender {
+    UIPrintInteractionController *pc = [UIPrintInteractionController
+                                        sharedPrintController];
+    
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    printInfo.outputType = UIPrintInfoOutputGeneral;
+    printInfo.jobName = @"Handicap Listing";
+    pc.printInfo = printInfo;
+    pc.showsPageRange = YES;
+    UIViewPrintFormatter *formatter = [printWebView viewPrintFormatter];
+    pc.printFormatter = formatter;
+    
+    UIPrintInteractionCompletionHandler completionHandler =
+    ^(UIPrintInteractionController *printController, BOOL completed,
+      NSError *error) {
+        if(!completed && error){
+            NSLog(@"Print failed - domain: %@ error code %u", error.domain,
+                 error.code);
+        }
+    };
+    
+    [pc presentAnimated:YES completionHandler:completionHandler];
+    
+}
+
 
 @end
