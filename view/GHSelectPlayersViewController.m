@@ -41,7 +41,7 @@
     
     
     GHPlayer *player = (GHPlayer*)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", player.lastName, player.firstName];
+    cell.textLabel.text = [player description];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if ([_selectedPlayers containsObject:player]) {

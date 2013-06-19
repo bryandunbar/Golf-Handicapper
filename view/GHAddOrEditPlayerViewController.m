@@ -7,10 +7,12 @@
 //
 
 #import "GHAddOrEditPlayerViewController.h"
+#import "GHScoreListViewController.h"
 
 @interface GHAddOrEditPlayerViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *firstName;
 @property (weak, nonatomic) IBOutlet UITextField *lastName;
+@property (weak, nonatomic) IBOutlet UILabel *numScoresLabel;
 
 
 @end
@@ -31,10 +33,18 @@
         self.navigationItem.leftBarButtonItem = self.navigationItem.rightBarButtonItem = nil; // Pushed, use default back
         self.title = @"Edit Player";
         [self configureView];
+        
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[self.player description] style:UIBarButtonItemStyleBordered target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
     }
     
     [self.firstName becomeFirstResponder];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureView];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -49,6 +59,9 @@
 -(void)configureView {
     self.firstName.text = self.player.firstName;
     self.lastName.text = self.player.lastName;
+    
+    int scoreCount = self.player.scores.count;
+    self.numScoresLabel.text = [NSString stringWithFormat:@"%d Score%@", scoreCount, scoreCount == 1 ? @"" : @"s"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,4 +89,12 @@
         [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark -
+#pragma mark Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([@"editScoresSegue" isEqualToString:segue.identifier]) {
+        GHScoreListViewController *controller = (GHScoreListViewController*)segue.destinationViewController;
+        controller.player = self.player;
+    }
+}
 @end

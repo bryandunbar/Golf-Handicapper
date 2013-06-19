@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "SSManagedObject.h"
+#import "GHHandicapCalculator.h"
 
 @class GHLeague;
 @class GHScore;
@@ -24,6 +25,8 @@
 /** Transient **/
 @property (nonatomic, retain) NSNumber * score;
 
+@property (nonatomic,readonly) GHHandicapCalculator *calculator;
+
 @end
 
 @interface GHPlayer (CoreDataGeneratedAccessors)
@@ -38,5 +41,6 @@
 - (void)addScores:(NSSet *)values;
 - (void)removeScores:(NSSet *)values;
 
+-(double)calculateIndex;
 
 @end

@@ -152,10 +152,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="dfL-4L-3yF" firstAttribute="leading" secondItem="wcz-W4-3VV" secondAttribute="leading" constant="26" id="0mf-7m-kDB"/>
+                                            <constraint firstItem="dfL-4L-3yF" firstAttribute="leading" secondItem="wcz-W4-3VV" secondAttribute="leading" constant="26" type="user" id="0mf-7m-kDB"/>
                                             <constraint firstItem="dfL-4L-3yF" firstAttribute="centerY" secondItem="3ou-kM-tdh" secondAttribute="centerY" type="default" id="6Tz-Uy-6iN"/>
                                             <constraint firstItem="3ou-kM-tdh" firstAttribute="top" secondItem="wcz-W4-3VV" secondAttribute="top" constant="8" id="LhU-bq-MVx"/>
-                                            <constraint firstItem="3ou-kM-tdh" firstAttribute="leading" secondItem="dfL-4L-3yF" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Xtb-BK-lku"/>
+                                            <constraint firstAttribute="trailing" secondItem="3ou-kM-tdh" secondAttribute="trailing" constant="18" type="user" id="W5g-pk-i2U"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -171,7 +171,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4z-fQ-Slm">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="cQR-7s-v2W"/>
+                                                        <constraint firstAttribute="height" constant="44" id="gds-SW-yQz"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" title="Get Handicaps">
@@ -189,8 +189,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="top" secondItem="myU-8T-QhD" secondAttribute="top" constant="1" id="OtK-Zx-RiN"/>
-                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="centerX" secondItem="myU-8T-QhD" secondAttribute="centerX" type="default" id="lAv-xO-R42"/>
+                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="centerY" secondItem="myU-8T-QhD" secondAttribute="centerY" type="default" id="8TG-Hx-Tnz"/>
+                                            <constraint firstAttribute="trailing" secondItem="C4z-fQ-Slm" secondAttribute="trailing" constant="10" type="user" id="VKy-sZ-cyB"/>
+                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="leading" secondItem="myU-8T-QhD" secondAttribute="leading" constant="10" type="user" id="VwB-rv-5x8"/>
+                                            <constraint firstItem="C4z-fQ-Slm" firstAttribute="centerX" secondItem="myU-8T-QhD" secondAttribute="centerX" type="user" id="lAv-xO-R42"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -416,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKE-Gb-9tU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2168" y="-1055"/>
+            <point key="canvasLocation" x="2192" y="-1767"/>
         </scene>
         <!--Leagues View Controller - Leagues-->
         <scene sceneID="fbk-Hn-NiW">
@@ -435,7 +437,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrx-0a-4kA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2168" y="-1764"/>
+            <point key="canvasLocation" x="2192" y="-2652"/>
         </scene>
         <!--Courses View Controller - Courses-->
         <scene sceneID="ch8-3N-M5B">
@@ -717,6 +719,36 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="LRE-nX-N4l">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wwn-Qw-Bvw">
+                                        <rect key="frame" x="0.0" y="120" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0 Scores" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDh-mP-oPx">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="202" id="Ybh-mg-tbD"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="yDh-mP-oPx" firstAttribute="top" secondItem="wwn-Qw-Bvw" secondAttribute="top" constant="12" id="dRH-RH-YN3"/>
+                                            <constraint firstItem="yDh-mP-oPx" firstAttribute="leading" secondItem="wwn-Qw-Bvw" secondAttribute="leading" constant="30" id="oeP-2I-gp4"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="vkp-BP-t62" kind="push" identifier="editScoresSegue" id="mPc-g9-BUJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="lmG-Rm-YF2" id="hrS-Cl-jul"/>
@@ -738,11 +770,84 @@
                     <connections>
                         <outlet property="firstName" destination="upd-Jf-cUI" id="nkV-T9-rHh"/>
                         <outlet property="lastName" destination="X8S-Qs-TDn" id="fAB-0z-rGj"/>
+                        <outlet property="numScoresLabel" destination="yDh-mP-oPx" id="9Wn-tq-Fls"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUq-bS-EaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2968" y="-1061"/>
+            <point key="canvasLocation" x="2992" y="-1773"/>
+        </scene>
+        <!--Score List View Controller-->
+        <scene sceneID="K6r-JS-KjB">
+            <objects>
+                <tableViewController id="vkp-BP-t62" customClass="GHScoreListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Icx-gp-GUD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GHScoreCell" id="Gae-t7-ArY" customClass="GHScoreCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qr0-DR-Z4y">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="239" type="user" id="7fS-LW-b9f"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="85" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gls-Jo-tjY">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" type="user" id="FXi-Nu-iGw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <color key="textColor" red="0.28121069999999998" green="0.53008341950000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Golf Course" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRs-L6-2Re">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="WnT-UG-aYx"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gls-Jo-tjY" secondAttribute="trailing" constant="20" type="user" id="3Ph-YC-Xc0"/>
+                                    <constraint firstItem="fRs-L6-2Re" firstAttribute="bottom" secondItem="gls-Jo-tjY" secondAttribute="bottom" type="default" id="3fa-DO-cq7"/>
+                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="leading" secondItem="qr0-DR-Z4y" secondAttribute="trailing" constant="-1" type="user" id="HIv-Mn-Kxe"/>
+                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="top" secondItem="Gae-t7-ArY" secondAttribute="top" type="default" id="LAt-hu-jbY"/>
+                                    <constraint firstItem="qr0-DR-Z4y" firstAttribute="leading" secondItem="Gae-t7-ArY" secondAttribute="leading" constant="20" type="user" id="MXJ-Rl-OVP"/>
+                                    <constraint firstItem="fRs-L6-2Re" firstAttribute="leading" secondItem="Gae-t7-ArY" secondAttribute="leading" constant="20" type="default" id="ZZH-VM-Qj5"/>
+                                    <constraint firstItem="gls-Jo-tjY" firstAttribute="centerY" secondItem="Gae-t7-ArY" secondAttribute="centerY" type="default" id="dKw-Ou-QoN"/>
+                                    <constraint firstItem="qr0-DR-Z4y" firstAttribute="top" secondItem="Gae-t7-ArY" secondAttribute="top" constant="2" id="gC7-7b-dHI"/>
+                                    <constraint firstItem="fRs-L6-2Re" firstAttribute="trailing" secondItem="qr0-DR-Z4y" secondAttribute="trailing" type="default" id="wj8-LN-KSg"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="courseLabel" destination="fRs-L6-2Re" id="ged-JY-9HI"/>
+                                    <outlet property="dateLabel" destination="qr0-DR-Z4y" id="mzm-4i-4cx"/>
+                                    <outlet property="scoreLabel" destination="gls-Jo-tjY" id="uiD-4d-eMV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vkp-BP-t62" id="JKI-AP-W7V"/>
+                            <outlet property="delegate" destination="vkp-BP-t62" id="ycL-t8-dOR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="hx4-nF-Kr7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vVv-bj-K7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3362" y="-1773"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mFx-MS-iIU">
@@ -760,14 +865,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pET-jg-vAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2590" y="-1061"/>
+            <point key="canvasLocation" x="2614" y="-1773"/>
         </scene>
         <!--Add Or Edit League View Controller - New League-->
         <scene sceneID="INU-9X-zen">
             <objects>
                 <tableViewController id="qih-fs-mGp" customClass="GHAddOrEditLeagueViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AWE-ss-ZhS">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -852,7 +957,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KGf-ff-EPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3022" y="-1764"/>
+            <point key="canvasLocation" x="3046" y="-2652"/>
         </scene>
         <!--Select Players View Controller - Select Players-->
         <scene sceneID="Kbb-ma-jrg">
@@ -862,7 +967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnL-gS-8Pt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3471" y="-1770"/>
+            <point key="canvasLocation" x="3495" y="-2658"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="imi-ds-Dlp">
@@ -880,7 +985,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zV-IT-yn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2584" y="-1764"/>
+            <point key="canvasLocation" x="2608" y="-2652"/>
         </scene>
         <!--Table View Controller - Settings-->
         <scene sceneID="egv-GN-3wU">
@@ -1035,6 +1140,7 @@
         <class className="GHAddOrEditCourseViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditCourseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelTapped:"/>
                 <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="abbreviation" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="name" candidateClass="UITextField"/>
@@ -1053,10 +1159,9 @@
         <class className="GHAddOrEditPlayerViewController" superclassName="UQFormTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHAddOrEditPlayerViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelTapped:"/>
-                <relationship kind="action" name="saveTapped:"/>
                 <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="numScoresLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="GHCoursesViewController" superclassName="SSManagedTableViewController">
@@ -1095,6 +1200,17 @@
                 <relationship kind="action" name="postTapped:"/>
             </relationships>
         </class>
+        <class className="GHScoreCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHScoreCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GHScoreListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHScoreListViewController.h"/>
+        </class>
         <class className="GHSelectPlayersViewController" superclassName="SSManagedTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GHSelectPlayersViewController.h"/>
         </class>
@@ -1120,8 +1236,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="NMC-94-y5f"/>
         <segue reference="Pu4-YL-GVb"/>
+        <segue reference="aYF-mu-Zjt"/>
         <segue reference="Fnl-fO-Iy6"/>
     </inferredMetricsTieBreakers>
 </document>

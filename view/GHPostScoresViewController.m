@@ -14,7 +14,6 @@
 #import "GHPlayerScoreCell.h"
 #import "UQDateField2.h"
 #import "BDPickerField.h"
-#import "GHHandicapCalculator.h"
 
 #define LEAGUE_TAG      1000
 #define COURSE_TAG      1001
@@ -25,9 +24,6 @@
     NSArray *_leagues;
     NSArray *_courses;
     NSArray *_players;
-    
-    GHHandicapCalculator *calculator;
-
 }
 
 @property (nonatomic,strong) NSDate *selectedDate;
@@ -67,7 +63,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    calculator = [[GHHandicapCalculator alloc] init];
     self.selectedDate = [NSDate date];
     
     [self getCoursesWithBlock:^(NSArray *courses) {
@@ -141,7 +136,7 @@
             pickerField.picker.delegate = self;
             pickerField.picker.tag = COURSE_TAG;
             pickerField.picker.dataSource = self;
-            pickerField.text = [NSString stringWithFormat:@"%@ [%@]", self.selectedCourse.name, self.selectedCourse.tees];
+            pickerField.text = [self.selectedCourse description];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -166,7 +161,7 @@
         // Players...
         GHPlayerScoreCell *cell = (GHPlayerScoreCell*)[tableView dequeueReusableCellWithIdentifier:@"GHPlayerScoreCell"];
         GHPlayer *player = [_players objectAtIndex:indexPath.row];
-        cell.playerName.text = [NSString stringWithFormat:@"%@, %@", player.lastName, player.firstName];
+        cell.playerName.text = [player description];
         cell.score.text = [player.score stringValue];
         cell.score.tag = SCORE_BEGIN_TAG + indexPath.row;
         cell.score.delegate = self;
@@ -231,7 +226,7 @@
         return [[_leagues objectAtIndex:row] name];
     else if (pickerView.tag == COURSE_TAG) {
         GHCourse *course = _courses[row];
-        return [NSString stringWithFormat:@"%@ [%@]", course.name, course.tees];
+        return [course description];
     }
     
     return @"";
@@ -281,12 +276,10 @@
             score.league = self.selectedLeague;
             score.player = player;
             [score save];
-            
+
+            // Update the player as well
             [player addScoresObject:score];
-            double index = [calculator handicapIndexForScores:[player.scores allObjects]];
-            player.handicapIndex = @(index);
-            [player save];
-            
+            [player calculateIndex]; // Calls save for us
         }
     }
     

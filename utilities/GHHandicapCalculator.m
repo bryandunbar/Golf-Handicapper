@@ -7,6 +7,7 @@
 //
 
 #import "GHHandicapCalculator.h"
+#import "GHPlayer.h"
 #import "GHScore.h"
 
 @interface GHHandicapCalculator()

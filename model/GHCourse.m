@@ -24,4 +24,8 @@
 + (NSArray *)defaultSortDescriptors {
  return @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
 }
+
+-(NSString*)description {
+    return [NSString stringWithFormat:@"%@ [%@]", self.name, self.tees];
+}
 @end

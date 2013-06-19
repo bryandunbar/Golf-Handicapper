@@ -19,6 +19,7 @@
 @dynamic player;
 @dynamic league;
 
+
 + (NSString *)entityName {
     return @"Score";
 }
@@ -33,6 +34,15 @@
     
     double unrounded = (dValue - dRating) * 113.0 / iSlope;
     return roundf( unrounded*10.0)/10.0; // Round to nearest tenth
+}
+
+-(void)delete {
+
+    GHPlayer *player = self.player; // Store this before we delete the thing
+    [super delete];
+
+    // Update the players index
+    [player calculateIndex];
 }
 
 @end

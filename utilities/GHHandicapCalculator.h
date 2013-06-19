@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPlayer.h"
 #import "GHCourse.h"
 @interface GHHandicapCalculator : NSObject
 

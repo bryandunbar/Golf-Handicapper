@@ -58,7 +58,7 @@
 -(void)setSelectedCourse:(GHCourse *)selectedCourse {
     if (_selectedCourse != selectedCourse) {
         _selectedCourse = selectedCourse;
-        self.coursePicker.text = [NSString stringWithFormat:@"%@ [%@]", _selectedCourse.name, _selectedCourse.tees];
+        self.coursePicker.text = [_selectedCourse description];
         [self.tableView reloadData];
     }
 }
@@ -133,7 +133,7 @@
         return [[_leagues objectAtIndex:row] name];
     else if (pickerView.tag == COURSE_TAG) {
         GHCourse *course = _courses[row];
-        return [NSString stringWithFormat:@"%@ [%@]", course.name, course.tees];
+        return [course description];
     }
     
     return @"";

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "SSManagedObject.h"
+
 @class GHCourse, GHPlayer, GHLeague;
 
 @interface GHScore : SSManagedObject

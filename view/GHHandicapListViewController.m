@@ -78,7 +78,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     if (self.course)
-        return [NSString stringWithFormat:@"%@ [%@]", self.course.name, self.course.tees];
+        return [self.course description];
     else
         return @"Handicap Index";
 }
@@ -90,7 +90,7 @@
     
     NSDictionary *dict = data[indexPath.row];
     GHPlayer *player = dict[@"player"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", player.lastName, player.firstName];
+    cell.textLabel.text = [player description];
     
     if (self.course) { // Showing trends
         int trend = [dict[@"trend"] intValue];
