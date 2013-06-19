@@ -54,7 +54,6 @@
     self.dateField.dateMode = UIDatePickerModeDate;
     self.dateField.dateFormat = @"MM/dd/yyyy";
 
-
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
@@ -101,10 +100,13 @@
     
     [self getLeaguesWithBlock:^(NSArray *leagues) {
         _leagues = leagues;
+        [self.leaguePicker setSelectedRow:[_leagues indexOfObject:self.score.league] inComponent:0 animated:NO];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }];
     
     [self getCoursesWithBlock:^(NSArray *courses) {
+        _courses = courses;
+        [self.coursePicker setSelectedRow:[_courses indexOfObject:self.score.course] inComponent:0 animated:NO];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
     }];
     
@@ -116,6 +118,7 @@
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         fetchRequest.entity = [GHLeague entityWithContext:context];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"players contains %@", self.score.player];
         fetchRequest.sortDescriptors = [GHLeague defaultSortDescriptors];
         
         NSArray *array = [context executeFetchRequest:fetchRequest error:nil];
@@ -160,10 +163,12 @@
     return @"";
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (pickerView.tag == LEAGUE_TAG)
+    if (pickerView.tag == LEAGUE_TAG) {
         self.score.league = _leagues[row];
-    else if (pickerView.tag == COURSE_TAG) {
+        self.leaguePicker.text = self.score.league.name;
+    } else if (pickerView.tag == COURSE_TAG) {
         self.score.course = _courses[row];
+        self.coursePicker.text = [self.score.course description];
     }
 }
 

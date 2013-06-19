@@ -11,5 +11,4 @@
 #import "UQFormTableViewController.h"
 @interface GHEditScoreViewController : UQFormTableViewController
 @property (nonatomic,strong) GHScore *score;
-
 @end
