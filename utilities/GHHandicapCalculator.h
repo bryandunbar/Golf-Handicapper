@@ -10,7 +10,7 @@
 #import "GHCourse.h"
 @interface GHHandicapCalculator : NSObject
 
--(double)handicapIndexForScores:(NSArray*)scores;
+-(double)handicapIndexForScores:(NSArray*)scores usedScores:(NSArray**)usedScoreArrayReference;
 -(int)courseHandicapForHandicap:(double)handicapIndex forCourse:(GHCourse*)course;
 
 @end

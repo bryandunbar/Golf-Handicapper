@@ -17,7 +17,7 @@
 
 @implementation GHHandicapCalculator
 
--(double)handicapIndexForScores:(NSArray *)scores {
+-(double)handicapIndexForScores:(NSArray *)scores usedScores:(NSArray**)usedScoreArrayReference {
 
     // Compute the differentials we'll use to calculate the index for the set of scores given
     NSArray *differentials = [self orderedDifferentials:scores];
@@ -47,16 +47,29 @@
     
     // Slice the array
     NSArray *slicedDiffs = [differentials subarrayWithRange:diffRange];
+
+    // Keep track of what scores are used in the calculation
+    NSMutableArray *usedScoreCollector = [NSMutableArray arrayWithCapacity:slicedDiffs.count];
     
     // Find the average
     __block double sum = 0.0;
     [slicedDiffs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSNumber *diff = (NSNumber*)obj;
+        NSDictionary *diffDict = (NSDictionary*)obj;
+        
+        // Add the differential
+        NSNumber *diff = (NSNumber*)diffDict[@"diff"];
         sum += [diff doubleValue];
+        
+        // This socre was used
+        [usedScoreCollector addObject:diffDict[@"score"]];
     }];
-    double avg = sum / slicedDiffs.count;
     
-    // times 0.96
+    if (usedScoreArrayReference != NULL) {
+        *usedScoreArrayReference = [NSArray arrayWithArray:usedScoreCollector];
+    }
+    
+    // Calculate the index
+    double avg = sum / slicedDiffs.count;
     double index = avg * 0.96;
     
     // truncate to 1 decimal
@@ -77,11 +90,16 @@
     // Now create the differentials
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:finalScores.count];
     for (GHScore *score in scores) {
-        [array addObject:@(score.differential)];
+        [array addObject:
+         @{
+            @"score":score,
+            @"diff":@(score.differential)
+         }];
     }
     
     // Sort ascending
-    NSArray *sortedDiffs = [array sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *sortedDiffs = [array sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"diff" ascending:YES]]];
+    //NSArray *sortedDiffs = [array sortedArrayUsingSelector:@selector(compare:)];
     return sortedDiffs;
 }
 

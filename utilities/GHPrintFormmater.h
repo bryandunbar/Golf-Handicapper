@@ -12,6 +12,7 @@
 
 @interface GHPrintFormmater : NSObject
 
--(NSString*)printableHtmlForData:(NSArray*)array league:(GHLeague*)league andCourse:(GHCourse*)course;
-
+-(NSString*)htmlRankingForData:(NSArray*)array league:(GHLeague*)league andCourse:(GHCourse*)course;
+-(NSString*)htmlCardsForData:(NSArray *)array league:(GHLeague*)league andCourse:(GHCourse*)course;
+-(NSString*)htmlCardForPlayer:(NSDictionary *)printDict league:(GHLeague*)league andCourse:(GHCourse*)course;
 @end

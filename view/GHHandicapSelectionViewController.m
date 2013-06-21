@@ -15,6 +15,7 @@
 
 #define LEAGUE_TAG      1000
 #define COURSE_TAG      1001
+#define NO_COURSE_LABEL @"<No Course, Show Index>"
 
 @interface GHHandicapSelectionViewController () <UIPickerViewDataSource, UIPickerViewDelegate> {
     NSArray *_leagues;
@@ -58,7 +59,7 @@
 -(void)setSelectedCourse:(GHCourse *)selectedCourse {
     if (_selectedCourse != selectedCourse) {
         _selectedCourse = selectedCourse;
-        self.coursePicker.text = [_selectedCourse description];
+        self.coursePicker.text = _selectedCourse ? [_selectedCourse description] : NO_COURSE_LABEL;
         [self.tableView reloadData];
     }
 }
@@ -81,10 +82,12 @@
     }];
     
     [self getCoursesWithBlock:^(NSArray *courses) {
-        NSMutableArray *arr = [NSMutableArray arrayWithObject:@"<No Course, Show Index>"];
+        NSMutableArray *arr = [NSMutableArray arrayWithObject:NO_COURSE_LABEL];
         [arr addObjectsFromArray:courses];
         _courses = arr;
-        if (_courses.count > 1) self.selectedCourse = _courses[1];
+        if (_courses.count > 1) {self.selectedCourse = _courses[1];
+            [self.coursePicker setSelectedRow:1 inComponent:0 animated:NO];
+        }
 
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
     }];
@@ -136,7 +139,7 @@
     else if (pickerView.tag == COURSE_TAG) {
         
         if (row == 0) {
-            return @"<No Course, Show Index>";
+            return NO_COURSE_LABEL;
         } else {
             GHCourse *course = _courses[row];
             return [course description];

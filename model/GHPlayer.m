@@ -43,7 +43,7 @@
 
 -(double)calculateIndex {
     NSArray *scores = [self.scores allObjects];
-    double index = [self.calculator handicapIndexForScores:scores];
+    double index = [self.calculator handicapIndexForScores:scores usedScores:NULL];
     self.handicapIndex = @(index);
     [self save];
     return index;

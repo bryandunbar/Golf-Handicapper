@@ -9,10 +9,11 @@
 #import "GHHandicapListViewController.h"
 #import "GHHandicapCalculator.h"
 #import "GHPrintFormmater.h"
-@interface GHHandicapListViewController () <UIWebViewDelegate> {
-    NSMutableArray *data;
+@interface GHHandicapListViewController () <UIWebViewDelegate, UIActionSheetDelegate> {
+    NSArray *data;
     GHHandicapCalculator *calculator;
     UIWebView *printWebView;
+    
 }
 
 @property (nonatomic,strong) UIBarButtonItem *printButton;
@@ -27,7 +28,14 @@
     
     // Load the table
     [self getDataWithBlock:^{
-        [self createPrintWebView];
+        [self.tableView reloadData];
+        
+        if ([UIPrintInteractionController isPrintingAvailable]) {
+            UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+                                          initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printButtonTapped:)];
+            [self.navigationItem setRightBarButtonItem:barButton animated:NO];
+            self.printButton = barButton;
+        }
     }];
 }
 
@@ -41,30 +49,29 @@
 #pragma mark - Get Data
 -(void)getDataWithBlock:(void (^)(void))block  {
     
-        // Build the data
-        NSArray *players = [self.league.players allObjects];
-        data = [NSMutableArray arrayWithCapacity:players.count];
+    // Build the data
+    NSArray *players = [self.league.players allObjects];
+    players = [players sortedArrayUsingDescriptors:[GHPlayer defaultSortDescriptors]];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:players.count];
     
-        int count = 0;
-        for (GHPlayer *player in players) {
-            
-            NSSet *scores = self.useScoresFromSelectedLeagueOnly ?
-                [player.scores filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"league == %@", self.league]] : player.scores;
-            
-            double index = [calculator handicapIndexForScores:[scores allObjects]];
-            int trend = [calculator courseHandicapForHandicap:index forCourse:self.course];
-            
-            NSDictionary *dict = @{@"player":player, @"index":@(index), @"trend":@(trend)};
-            
-            // Stuff into the dataset and update the table
-            [self.tableView beginUpdates];
-            [data addObject:dict];
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:count inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
-            count++;
-            
-        }
-        block();
+    int count = 0;
+    for (GHPlayer *player in players) {
+        
+        NSSet *scores = self.useScoresFromSelectedLeagueOnly ?
+        [player.scores filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"league == %@", self.league]] : player.scores;
+        
+        NSArray *usedScores = [NSArray array];
+        double index = [calculator handicapIndexForScores:[scores allObjects] usedScores:&usedScores];
+        int trend = [calculator courseHandicapForHandicap:index forCourse:self.course];
+        
+        NSDictionary *dict = @{@"player":player, @"index":@(index), @"trend":@(trend), @"usedScores":usedScores};
+        
+        [arr addObject:dict];
+        count++;
+    }
+    
+    data = [arr sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"player.lastName" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"player.firstName" ascending:YES]]];
+    block();
 }
 
 #pragma mark - Table view data source
@@ -126,26 +133,38 @@
      */
 }
 
+
+
+
 #pragma mark - Printing
--(void)createPrintWebView {
+-(void)printButtonTapped:(id)sender {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Print" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Trend List", @"Handicap Cards", nil];
+    [actionSheet showFromBarButtonItem:self.printButton animated:YES];
+    
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self createPrintWebView:buttonIndex];
+}
+-(void)createPrintWebView:(GHHandicapListViewPrintOptions)printOption {
     
     printWebView = [[UIWebView alloc] initWithFrame:self.view.frame];
     printWebView.delegate = self;
     
     GHPrintFormmater *pf = [[GHPrintFormmater alloc] init];
-    NSString *html = [pf printableHtmlForData:data league:self.league andCourse:self.course];
+    
+    NSString *html = nil;
+    if (printOption == GHHandicapListViewPrintCards) {
+        html = [pf htmlCardsForData:data league:self.league andCourse:self.course];
+    } else {
+        html = [pf htmlRankingForData:data league:self.league andCourse:self.course];
+    }
+    
     [printWebView loadHTMLString:html baseURL:nil];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    
-    // Set up print button...
-    if ([UIPrintInteractionController isPrintingAvailable]) {
-        UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
-                                      initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printWebView:)];
-        [self.navigationItem setRightBarButtonItem:barButton animated:NO];
-        self.printButton = barButton;
-    }
+    [self printWebView:nil];
 }
 
 -(void)printWebView:(id)sender {
@@ -156,7 +175,8 @@
     printInfo.outputType = UIPrintInfoOutputGeneral;
     printInfo.jobName = @"Handicap Listing";
     pc.printInfo = printInfo;
-    pc.showsPageRange = YES;
+    
+    //pc.showsPageRange = YES;
     UIViewPrintFormatter *formatter = [printWebView viewPrintFormatter];
     pc.printFormatter = formatter;
     
