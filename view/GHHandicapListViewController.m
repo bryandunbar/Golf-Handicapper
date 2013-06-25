@@ -12,8 +12,9 @@
 @interface GHHandicapListViewController () <UIWebViewDelegate, UIActionSheetDelegate> {
     NSArray *data;
     GHHandicapCalculator *calculator;
-    UIWebView *printWebView;
     
+    UIPrintFormatter *cardPrintFormatter;
+    UIPrintFormatter *listPrintFormatter;    
 }
 
 @property (nonatomic,strong) UIBarButtonItem *printButton;
@@ -29,13 +30,7 @@
     // Load the table
     [self getDataWithBlock:^{
         [self.tableView reloadData];
-        
-        if ([UIPrintInteractionController isPrintingAvailable]) {
-            UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
-                                          initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printButtonTapped:)];
-            [self.navigationItem setRightBarButtonItem:barButton animated:NO];
-            self.printButton = barButton;
-        }
+        [self preparePrintFormatters];
     }];
 }
 
@@ -72,6 +67,28 @@
     
     data = [arr sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"player.lastName" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"player.firstName" ascending:YES]]];
     block();
+}
+
+-(void)preparePrintFormatters {
+
+    // No need to do this if we don't have the ability to print
+    if ([UIPrintInteractionController isPrintingAvailable]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+       
+            GHPrintFormmater *pf = [[GHPrintFormmater alloc] init];
+            cardPrintFormatter = [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:[pf htmlCardsForData:data league:self.league andCourse:self.course]];
+            listPrintFormatter = [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:[pf htmlRankingForData:data league:self.league andCourse:self.course]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Ok to show the print button now
+                UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printButtonTapped:)];
+                [self.navigationItem setRightBarButtonItem:barButton animated:NO];
+                self.printButton = barButton;
+            });
+        });
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -116,24 +133,12 @@
         else
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%2.1f", index];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
-
-
 
 
 #pragma mark - Printing
@@ -144,54 +149,34 @@
     
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    [self createPrintWebView:buttonIndex];
+    [self print:buttonIndex];
 }
--(void)createPrintWebView:(GHHandicapListViewPrintOptions)printOption {
-    
-    printWebView = [[UIWebView alloc] initWithFrame:self.view.frame];
-    printWebView.delegate = self;
-    
-    GHPrintFormmater *pf = [[GHPrintFormmater alloc] init];
-    
-    NSString *html = nil;
-    if (printOption == GHHandicapListViewPrintCards) {
-        html = [pf htmlCardsForData:data league:self.league andCourse:self.course];
-    } else {
-        html = [pf htmlRankingForData:data league:self.league andCourse:self.course];
-    }
-    
-    [printWebView loadHTMLString:html baseURL:nil];
-}
-
--(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self printWebView:nil];
-}
-
--(void)printWebView:(id)sender {
+-(void)print:(GHHandicapListViewPrintOptions)printOption {
     UIPrintInteractionController *pc = [UIPrintInteractionController
                                         sharedPrintController];
     
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
     printInfo.outputType = UIPrintInfoOutputGeneral;
-    printInfo.jobName = @"Handicap Listing";
+    
+    if (printOption == GHHandicapListViewPrintCards) {
+        pc.printFormatter = cardPrintFormatter;
+        printInfo.jobName = @"Handicap Cards";
+    } else {
+        pc.printFormatter = listPrintFormatter;
+        printInfo.jobName = @"Handicap Listing";
+    }
     pc.printInfo = printInfo;
-    
     //pc.showsPageRange = YES;
-    UIViewPrintFormatter *formatter = [printWebView viewPrintFormatter];
-    pc.printFormatter = formatter;
-    
+
     UIPrintInteractionCompletionHandler completionHandler =
     ^(UIPrintInteractionController *printController, BOOL completed,
       NSError *error) {
         if(!completed && error){
             NSLog(@"Print failed - domain: %@ error code %u", error.domain,
-                 error.code);
+                  error.code);
         }
     };
     
     [pc presentAnimated:YES completionHandler:completionHandler];
-    
 }
-
-
 @end
